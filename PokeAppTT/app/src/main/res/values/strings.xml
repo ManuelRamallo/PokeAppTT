@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PokeAppTT</string>
+    <string name="error_title">An error has occurred, please try again.</string>
+    <string name="error_button">Try again</string>
+    <string name="error_no_content_title">All the pokemon have been frightened</string>
+    <string name="error_no_content_subtitle">Try again some other time, they may have gone into hiding and will take a while to come back</string>
 </resources>

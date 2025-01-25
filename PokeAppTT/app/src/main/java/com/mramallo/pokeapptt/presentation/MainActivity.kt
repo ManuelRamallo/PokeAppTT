@@ -8,20 +8,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.ui.unit.dp
 import com.mramallo.pokeapptt.presentation.ui.HomeScreen
-import com.mramallo.pokeapptt.presentation.ui.PokemonListViewModel
 import com.mramallo.pokeapptt.presentation.ui.theme.PokeAppTTTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,11 +28,10 @@ class MainActivity : ComponentActivity() {
         setContent {
 
             var query by rememberSaveable { mutableStateOf("") }
-            val viewModel = hiltViewModel<PokemonListViewModel>()
 
             PokeAppTTTheme {
                 Scaffold(
-                    modifier = Modifier.safeContentPadding().fillMaxSize(),
+                    modifier = Modifier.safeContentPadding().fillMaxSize().padding(top = 24.dp),
                     topBar = {
                        TextField(
                            value = query,
@@ -49,7 +43,7 @@ class MainActivity : ComponentActivity() {
                        )
                     }
                 ) { innerPadding ->
-                    HomeScreen(modifier = Modifier.padding(innerPadding), viewModel = viewModel)
+                    HomeScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

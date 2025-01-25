@@ -23,7 +23,7 @@ class PokemonPagingSource(
         val pageSize = params.loadSize
 
         return try {
-            delay(1500)
+            delay(1000) // This is not funcional, is only for the demo
             val pokemonList =
                 pokemonApi.getPokemonList(offset = page, limit = pageSize).toPokemonList()
             LoadResult.Page(

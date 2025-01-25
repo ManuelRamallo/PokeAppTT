@@ -11,6 +11,7 @@ import androidx.paging.cachedIn
 import com.mramallo.pokeapptt.domain.entity.PokemonResult
 import com.mramallo.pokeapptt.domain.usecase.GetPokemonListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,15 +21,13 @@ class PokemonListViewModel @Inject constructor(
     private val getPokemonListUseCase: GetPokemonListUseCase
 ): ViewModel() {
 
-    // TODO - ESTA ES MI FORMA
-    // TODO - PERO ESTÁ REPITIENDO LOS ELEMENTOS
-    /*var state by mutableStateOf(PokemonListState())
+    var state by mutableStateOf(PokemonListState())
         private set
 
     fun getPokemonList() {
-        //getPokemonListUseCase().flow.cachedIn(viewModelScope)
         viewModelScope.launch {
             state = PokemonListState(loading = true)
+            delay(2000) // This is not funcional, is only for the demo
             state = PokemonListState(pokemonList = getPokemonListUseCase.invoke().flow.cachedIn(viewModelScope))
         }
     }
@@ -37,8 +36,5 @@ class PokemonListViewModel @Inject constructor(
     data class PokemonListState(
         val pokemonList: Flow<PagingData<PokemonResult>>? = null,
         val loading: Boolean = false
-    )*/
-
-    // TODO - ESTA ES MI FORMA
-    val pokemonList = getPokemonListUseCase.invoke().flow.cachedIn(viewModelScope)
+    )
 }
