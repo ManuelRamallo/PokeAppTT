@@ -1,4 +1,4 @@
-package com.mramallo.pokeapptt.presentation
+package com.mramallo.pokeapptt
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
