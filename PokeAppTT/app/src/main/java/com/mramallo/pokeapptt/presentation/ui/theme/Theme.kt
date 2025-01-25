@@ -1,4 +1,4 @@
-package com.mramallo.pokeapptt.ui.theme
+package com.mramallo.pokeapptt.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

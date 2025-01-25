@@ -34,8 +34,8 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 # Retrofit
-retrofit = { group = "com.squareup.retrotit2", name = "retrofit", version.ref="retrofitVersion"}
-retrofit-gson = { group = "com.squareup.retrotit2", name = "converter-gson", version.ref = "retrofitVersion"}
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref="retrofitVersion"}
+retrofit-gson-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion"}
 # Dagger
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerVersion"}
 dagger-kapt = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "daggerVersion"}
