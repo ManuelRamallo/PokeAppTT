@@ -54,7 +54,7 @@ fun HomeScreen(
 
     val listState: LazyListState = rememberLazyListState()
     val pokemonList = pokemonListViewModel.statePokemonList.pokemonList?.collectAsLazyPagingItems()
-    var query by rememberSaveable { mutableStateOf("") }
+    var query by remember { mutableStateOf("") }
     var debounceJob by remember { mutableStateOf<Job?>(null) }
     val coroutineScope = rememberCoroutineScope()
 
