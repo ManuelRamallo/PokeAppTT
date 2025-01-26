@@ -19,7 +19,7 @@ class PokemonPagingSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonResult> {
-        val page = params.key ?: 1
+        val page = params.key ?: 0
         val pageSize = params.loadSize
 
         return try {
@@ -28,7 +28,7 @@ class PokemonPagingSource(
                 pokemonApi.getPokemonList(offset = page, limit = pageSize).toPokemonList()
             LoadResult.Page(
                 data = pokemonList.results,
-                prevKey = if (page == 1) null else page.minus(5),
+                prevKey = if (page == 0) null else page.minus(5),
                 nextKey = if (pokemonList.results.size < pageSize) null else page.plus(5)
             )
         } catch (e: Exception) {

@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     composable<HomeRoute> {
                         HomeScreen(
-                            onDetailClick = {
+                            onDetailClick = { namePokemon ->
                                 navController.navigate(DetailRoute)
                             }
                         )

@@ -35,8 +35,7 @@ import com.mramallo.pokeapptt.presentation.ui.components.DisplayPokemonListEleme
 @Composable
 fun HomeScreen(
     pokemonListViewModel: PokemonListViewModel = hiltViewModel(),
-    pokemonDetailViewModel: PokemonDetailViewModel = hiltViewModel(),
-    onDetailClick: () -> Unit,
+    onDetailClick: (String) -> Unit,
 ) {
     LaunchedEffect(Unit) {
         pokemonListViewModel.getPokemonList()
@@ -111,7 +110,6 @@ fun HomeScreen(
                                     contentType = pokemonList.itemContentType { it.name }
                                 ) { index ->
                                     DisplayPokemonListElement(
-                                        pokemonDetailViewModel = pokemonDetailViewModel,
                                         pokemon = pokemonList[index],
                                         numberPokemon = index,
                                         onDetailClick = onDetailClick
