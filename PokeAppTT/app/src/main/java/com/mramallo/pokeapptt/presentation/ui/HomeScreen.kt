@@ -30,18 +30,20 @@ import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import com.mramallo.pokeapptt.presentation.ui.components.DisplayError
 import com.mramallo.pokeapptt.presentation.ui.components.DisplayNoContent
+import com.mramallo.pokeapptt.presentation.ui.components.DisplayPokemonListElement
 
 @Composable
 fun HomeScreen(
-    viewModel: PokemonListViewModel = hiltViewModel(),
+    pokemonListViewModel: PokemonListViewModel = hiltViewModel(),
+    pokemonDetailViewModel: PokemonDetailViewModel = hiltViewModel(),
     onDetailClick: () -> Unit,
 ) {
     LaunchedEffect(Unit) {
-        viewModel.getPokemonList()
+        pokemonListViewModel.getPokemonList()
     }
 
     val listState: LazyListState = rememberLazyListState()
-    val pokemonList = viewModel.state.pokemonList?.collectAsLazyPagingItems()
+    val pokemonList = pokemonListViewModel.state.pokemonList?.collectAsLazyPagingItems()
     var query by rememberSaveable { mutableStateOf("") }
 
     Scaffold(
@@ -61,7 +63,7 @@ fun HomeScreen(
         }
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding).padding(vertical = 8.dp)) {
-            if (viewModel.state.loading) {
+            if (pokemonListViewModel.state.loading) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
@@ -108,14 +110,12 @@ fun HomeScreen(
                                     key = pokemonList.itemKey { it.uuid },
                                     contentType = pokemonList.itemContentType { it.name }
                                 ) { index ->
-                                    Column {
-                                        Text(
-                                            text = pokemonList[index]?.name ?: "",
-                                            modifier = Modifier.clickable {
-                                                onDetailClick()
-                                            }
-                                        )
-                                    }
+                                    DisplayPokemonListElement(
+                                        pokemonDetailViewModel = pokemonDetailViewModel,
+                                        pokemon = pokemonList[index],
+                                        numberPokemon = index,
+                                        onDetailClick = onDetailClick
+                                    )
                                 }
                             }
                         }

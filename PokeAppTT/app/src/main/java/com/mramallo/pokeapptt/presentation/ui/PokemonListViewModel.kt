@@ -27,7 +27,7 @@ class PokemonListViewModel @Inject constructor(
     fun getPokemonList() {
         viewModelScope.launch {
             state = PokemonListState(loading = true)
-            delay(2000) // This is not funcional, is only for the demo
+            //delay(2000) // This is not funcional, is only for the demo
             state = PokemonListState(pokemonList = getPokemonListUseCase.invoke().flow.cachedIn(viewModelScope))
         }
     }

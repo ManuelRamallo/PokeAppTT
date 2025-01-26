@@ -2,8 +2,10 @@ package com.mramallo.pokeapptt.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import com.mramallo.pokeapptt.data.mappers.toPokemonDetail
 import com.mramallo.pokeapptt.data.pagingSource.PokemonPagingSource
 import com.mramallo.pokeapptt.data.remote.api.PokemonApi
+import com.mramallo.pokeapptt.domain.entity.PokemonDetail
 import com.mramallo.pokeapptt.domain.entity.PokemonResult
 import com.mramallo.pokeapptt.domain.repository.PokemonRepository
 import javax.inject.Inject
@@ -25,4 +27,14 @@ class PokemonRepositoryImpl @Inject constructor(
             }
         )
     }
+
+    override suspend fun getPokemonDetail(name: String): PokemonDetail {
+        return try {
+            pokemonApi.getPokemonByName(name).toPokemonDetail()
+        } catch (e: Exception){
+            throw Exception()
+        }
+    }
+
+
 }

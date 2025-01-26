@@ -12,7 +12,7 @@ retrofitVersion = "2.11.0"
 daggerVersion = "2.52"
 hiltNavigationVersion = "1.2.0"
 pagingVersion = "3.3.5"
-coilVersion = "3.0.4"
+coilVersion = "2.6.0"
 okHttpVersion = "4.12.0"
 coroutineVersion = "1.10.1"
 dagger = "2.50"
@@ -49,7 +49,7 @@ navigation-compose = { group = "androidx.navigation", name = "navigation-compose
 # Paging
 paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "pagingVersion"}
 # Coil
-coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coilVersion"}
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilVersion"}
 # OkHttp
 okHttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttpVersion" }
 # Coroutine
