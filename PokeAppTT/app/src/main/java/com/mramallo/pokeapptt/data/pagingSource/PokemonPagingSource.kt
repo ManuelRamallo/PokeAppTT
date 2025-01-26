@@ -8,7 +8,6 @@ import com.mramallo.pokeapptt.domain.entity.PokemonResult
 import kotlinx.coroutines.delay
 
 class PokemonPagingSource(
-    // TODO ES POSIBLE QUE HAYA QUE PASAR EL QUERY POR AQUÍ, NO LO SE, HABRÁ QUE VERLO
     private val pokemonApi: PokemonApi,
 ) : PagingSource<Int, PokemonResult>() {
     override fun getRefreshKey(state: PagingState<Int, PokemonResult>): Int? {

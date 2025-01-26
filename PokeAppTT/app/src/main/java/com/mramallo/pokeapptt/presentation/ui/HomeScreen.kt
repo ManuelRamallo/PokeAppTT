@@ -21,6 +21,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -37,6 +39,9 @@ import com.mramallo.pokeapptt.R
 import com.mramallo.pokeapptt.presentation.ui.components.DisplayError
 import com.mramallo.pokeapptt.presentation.ui.components.DisplayNoContent
 import com.mramallo.pokeapptt.presentation.ui.components.DisplayPokemonListElement
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(
@@ -50,6 +55,8 @@ fun HomeScreen(
     val listState: LazyListState = rememberLazyListState()
     val pokemonList = pokemonListViewModel.statePokemonList.pokemonList?.collectAsLazyPagingItems()
     var query by rememberSaveable { mutableStateOf("") }
+    var debounceJob by remember { mutableStateOf<Job?>(null) }
+    val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
         modifier = Modifier
@@ -61,6 +68,15 @@ fun HomeScreen(
                 value = query,
                 onValueChange = {
                     query = it
+                    // Cancel debouncejob if is active
+                    debounceJob?.cancel()
+
+                    // Add time for write all text
+                    debounceJob = coroutineScope.launch {
+                        delay(500)
+                        pokemonListViewModel.getPokemonList(query)
+
+                    }
                 },
                 singleLine = true,
                 placeholder = {
@@ -82,7 +98,11 @@ fun HomeScreen(
             )
         }
     ) { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding).padding(vertical = 8.dp)) {
+        Box(
+            modifier = Modifier
+                .padding(innerPadding)
+                .padding(vertical = 8.dp)
+        ) {
             if (pokemonListViewModel.statePokemonList.loading) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
@@ -133,24 +153,12 @@ fun HomeScreen(
                                     DisplayPokemonListElement(
                                         pokemonListViewModel = pokemonListViewModel,
                                         pokemon = pokemonList[index],
-                                        numberPokemon = index,
                                         onDetailClick = onDetailClick
                                     )
                                 }
                             }
                         }
 
-
-                        if (pokemonList.loadState.append is LoadState.Loading) {
-                            item {
-                                Box(
-                                    modifier = Modifier.fillMaxSize(),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    CircularProgressIndicator()
-                                }
-                            }
-                        }
                         if (pokemonList.loadState.append is LoadState.Error && !pokemonList.loadState.hasError) {
                             item {
                                 DisplayError(pokemonList)

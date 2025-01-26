@@ -26,7 +26,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,13 +36,11 @@ import com.mramallo.pokeapptt.domain.entity.PokemonResult
 import com.mramallo.pokeapptt.presentation.ui.PokemonListViewModel
 import com.mramallo.pokeapptt.presentation.ui.utils.formatNumberPokemon
 import com.mramallo.pokeapptt.presentation.ui.utils.getColorByTypePokemon
-import com.mramallo.pokeapptt.presentation.ui.utils.getColorTextAccordingToBackground
 
 @Composable
 fun DisplayPokemonListElement(
     pokemonListViewModel: PokemonListViewModel,
     pokemon: PokemonResult?,
-    numberPokemon: Int,
     onDetailClick: (String) -> Unit
 ) {
 
@@ -83,7 +80,7 @@ fun DisplayPokemonListElement(
                         .padding(16.dp)
                 ) {
                     Text(
-                        text = "Nº ${numberPokemon.formatNumberPokemon()}",
+                        text = "Nº ${pokemonElement?.id?.formatNumberPokemon()}",
                         fontSize = 16.sp,
                     )
                     Text(
@@ -156,7 +153,6 @@ fun DisplayPokemonListElementPreview() {
             name = "Pikachu",
             url = "https://pokeapi.co/api/v2/pokemon/25/"
         ),
-        numberPokemon = 1,
         onDetailClick = {}
     )
 }

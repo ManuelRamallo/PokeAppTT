@@ -7,7 +7,6 @@ class GetPokemonListUseCase @Inject constructor(
     private val pokemonRepository: PokemonRepository
 ) {
 
-    // TODO - ES POSIBLE QUE HAY QUE METER EL QUERY DEL NOMBRE AQUÍ
     operator fun invoke() = pokemonRepository.getPokemonList()
 
 }

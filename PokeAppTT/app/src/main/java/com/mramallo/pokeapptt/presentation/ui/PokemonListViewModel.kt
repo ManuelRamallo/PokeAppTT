@@ -1,6 +1,5 @@
 package com.mramallo.pokeapptt.presentation.ui
 
-import android.annotation.SuppressLint
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
@@ -9,13 +8,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import androidx.paging.filter
 import com.mramallo.pokeapptt.domain.entity.PokemonDetail
 import com.mramallo.pokeapptt.domain.entity.PokemonResult
 import com.mramallo.pokeapptt.domain.usecase.GetPokemonDetailUseCase
 import com.mramallo.pokeapptt.domain.usecase.GetPokemonListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,7 +23,7 @@ import javax.inject.Inject
 class PokemonListViewModel @Inject constructor(
     private val getPokemonListUseCase: GetPokemonListUseCase,
     private val getPokemonDetailUseCase: GetPokemonDetailUseCase
-): ViewModel() {
+) : ViewModel() {
 
     var statePokemonList by mutableStateOf(PokemonListState())
         private set
@@ -34,19 +34,35 @@ class PokemonListViewModel @Inject constructor(
     var statePokemonElement = mutableStateMapOf<String, PokemonElementState>()
         private set
 
-    fun getPokemonList() {
-        viewModelScope.launch {
-            statePokemonList = PokemonListState(loading = true)
-            //delay(2000) // This is not funcional, is only for the demo TODO - ACTIVAR ESTO
-            statePokemonList = PokemonListState(pokemonList = getPokemonListUseCase.invoke().flow.cachedIn(viewModelScope))
+    /*
+    * If QUERY is filled we filter by hand, as the API does not allow filtering on the complete list */
+    fun getPokemonList(query: String = "") {
+        if (query.isNotEmpty()) {
+            viewModelScope.launch {
+                statePokemonList = PokemonListState(loading = true)
+                val pokemonListFiltered =
+                    getPokemonListUseCase.invoke().flow.cachedIn(viewModelScope).map {
+                        it.filter { pokemonResult ->
+                            pokemonResult.name.contains(query, ignoreCase = true)
+                        }
+                    }
+                statePokemonList = PokemonListState(pokemonList = pokemonListFiltered)
+            }
+        } else {
+            viewModelScope.launch {
+                statePokemonList = PokemonListState(loading = true)
+                statePokemonList = PokemonListState(
+                    pokemonList = getPokemonListUseCase.invoke().flow.cachedIn(viewModelScope)
+                )
+            }
         }
     }
 
     fun getPokemonElement(uuid: String, name: String) {
         viewModelScope.launch {
             statePokemonElement[uuid] = PokemonElementState(loading = true)
-            delay(1000) // This is not funcional, is only for the demo
-            statePokemonElement[uuid] = PokemonElementState(pokemonDetail = getPokemonDetailUseCase.invoke(name))
+            statePokemonElement[uuid] =
+                PokemonElementState(pokemonDetail = getPokemonDetailUseCase.invoke(name))
         }
     }
 
