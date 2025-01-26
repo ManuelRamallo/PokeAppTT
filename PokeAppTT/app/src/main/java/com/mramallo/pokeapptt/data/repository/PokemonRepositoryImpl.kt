@@ -32,7 +32,7 @@ class PokemonRepositoryImpl @Inject constructor(
         return try {
             pokemonApi.getPokemonByName(name).toPokemonDetail()
         } catch (e: Exception){
-            throw Exception()
+            throw Exception("Error getting pokemon detail")
         }
     }
 

@@ -1,6 +1,5 @@
 package com.mramallo.pokeapptt.presentation.ui.components
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -35,23 +34,23 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.mramallo.pokeapptt.R
 import com.mramallo.pokeapptt.domain.entity.PokemonResult
-import com.mramallo.pokeapptt.presentation.ui.PokemonDetailViewModel
+import com.mramallo.pokeapptt.presentation.ui.PokemonListViewModel
 import com.mramallo.pokeapptt.presentation.ui.utils.formatNumberPokemon
 import com.mramallo.pokeapptt.presentation.ui.utils.getColorByTypePokemon
 import com.mramallo.pokeapptt.presentation.ui.utils.getColorTextAccordingToBackground
 
 @Composable
 fun DisplayPokemonListElement(
-    pokemonDetailViewModel: PokemonDetailViewModel = hiltViewModel(),
+    pokemonListViewModel: PokemonListViewModel,
     pokemon: PokemonResult?,
     numberPokemon: Int,
     onDetailClick: (String) -> Unit
 ) {
 
     LaunchedEffect(Unit) {
-        pokemonDetailViewModel.getPokemonDetail(pokemon?.uuid ?: "", pokemon?.name ?: "")
+        pokemonListViewModel.getPokemonElement(pokemon?.uuid ?: "", pokemon?.name ?: "")
     }
-    val pokemonDetail = pokemonDetailViewModel.state[pokemon?.uuid]?.pokemonDetail
+    val pokemonElement = pokemonListViewModel.statePokemonElement[pokemon?.uuid]?.pokemonDetail
 
 
     Card(
@@ -62,9 +61,9 @@ fun DisplayPokemonListElement(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
-        colors = CardDefaults.cardColors(containerColor = getColorByTypePokemon(pokemonDetail?.types?.get(0)?.type?.name ?: "").copy(alpha = 0.2f))
+        colors = CardDefaults.cardColors(containerColor = getColorByTypePokemon(pokemonElement?.types?.get(0)?.type?.name ?: "").copy(alpha = 0.2f))
     ) {
-        if (pokemonDetailViewModel.state[pokemon?.uuid]?.loading == true) {
+        if (pokemonListViewModel.statePokemonElement[pokemon?.uuid]?.loading == true) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -93,10 +92,10 @@ fun DisplayPokemonListElement(
                         fontWeight = FontWeight.Bold
                     )
                     Spacer(modifier = Modifier.padding(vertical = 4.dp))
-                    if (pokemonDetail?.types != null) {
+                    if (pokemonElement?.types != null) {
                         Row {
-                            pokemonDetail.types.forEach { type ->
-                                DisplayType(type.type?.name ?: "")
+                            pokemonElement.types.forEach { type ->
+                                DisplayTypePokemon(type.type?.name ?: "")
                                 Spacer(modifier = Modifier.padding(horizontal = 4.dp))
                             }
                         }
@@ -104,8 +103,8 @@ fun DisplayPokemonListElement(
                     }
                 }
                 DisplayImage(
-                    image = pokemonDetail?.sprites?.front_default ?: "",
-                    type = pokemonDetail?.types?.get(0)?.type?.name ?: ""
+                    image = pokemonElement?.sprites?.front_default ?: "",
+                    type = pokemonElement?.types?.get(0)?.type?.name ?: ""
                 )
             }
         }
@@ -113,24 +112,7 @@ fun DisplayPokemonListElement(
 }
 
 
-@Composable
-fun DisplayType(type: String) {
-    Card(
-        modifier = Modifier,
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = getColorByTypePokemon(type))
-    ) {
-        Text(
-            text = type,
-            fontWeight = FontWeight.Bold,
-            fontSize = 14.sp,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
-            color = getColorTextAccordingToBackground(getColorByTypePokemon(type))
-        )
-    }
-}
+
 
 @Composable
 fun DisplayImage(
@@ -169,7 +151,7 @@ fun DisplayImage(
 @Composable
 fun DisplayPokemonListElementPreview() {
     DisplayPokemonListElement(
-        pokemonDetailViewModel = hiltViewModel(),
+        pokemonListViewModel = hiltViewModel(),
         pokemon = PokemonResult(
             name = "Pikachu",
             url = "https://pokeapi.co/api/v2/pokemon/25/"

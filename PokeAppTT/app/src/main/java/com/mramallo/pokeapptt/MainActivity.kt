@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.mramallo.pokeapptt.presentation.navigation.DetailRoute
 import com.mramallo.pokeapptt.presentation.navigation.HomeRoute
 import com.mramallo.pokeapptt.presentation.ui.DetailScreen
@@ -24,17 +25,19 @@ class MainActivity : ComponentActivity() {
             PokeAppTTTheme {
                 NavHost(
                     navController = navController,
-                    startDestination = HomeRoute
+                    startDestination = DetailRoute("bulbasaur") // TODO QUITAR ESTO LUEGO Y DEJAR LA HOME
                 ) {
                     composable<HomeRoute> {
                         HomeScreen(
                             onDetailClick = { namePokemon ->
-                                navController.navigate(DetailRoute)
+                                navController.navigate(DetailRoute(namePokemon))
                             }
                         )
                     }
                     composable<DetailRoute> {
+                        val args = it.toRoute<DetailRoute>()
                         DetailScreen(
+                            namePokemon = args.namePokemon,
                             onBackClick = {
                                 navController.popBackStack(route = HomeRoute, inclusive = false)
                             }

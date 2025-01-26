@@ -1,6 +1,8 @@
 package com.mramallo.pokeapptt.presentation.ui
 
-import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mramallo.pokeapptt.domain.entity.PokemonDetail
@@ -18,13 +20,14 @@ class PokemonDetailViewModel @Inject constructor(
     /*
     * This mapOf is necessary because without it and without assigning a UUID to each element,
     * all images would be of the same pokemon and would not load correctly.*/
-    var state = mutableStateMapOf<String, PokemonDetailState>()
+    var statePokemonDetail by mutableStateOf(PokemonDetailState())
+        private set
 
-    fun getPokemonDetail(uuid: String, name: String) {
+    fun getPokemonDetail(name: String) {
         viewModelScope.launch {
-            state[uuid] = PokemonDetailState(loading = true)
+            statePokemonDetail = PokemonDetailState(loading = true)
             delay(1000) // This is not funcional, is only for the demo
-            state[uuid] = PokemonDetailState(pokemonDetail = getPokemonDetailUseCase.invoke(name))
+            statePokemonDetail = PokemonDetailState(pokemonDetail = getPokemonDetailUseCase.invoke(name))
         }
     }
 

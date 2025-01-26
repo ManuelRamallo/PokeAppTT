@@ -42,7 +42,7 @@ fun HomeScreen(
     }
 
     val listState: LazyListState = rememberLazyListState()
-    val pokemonList = pokemonListViewModel.state.pokemonList?.collectAsLazyPagingItems()
+    val pokemonList = pokemonListViewModel.statePokemonList.pokemonList?.collectAsLazyPagingItems()
     var query by rememberSaveable { mutableStateOf("") }
 
     Scaffold(
@@ -62,7 +62,7 @@ fun HomeScreen(
         }
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding).padding(vertical = 8.dp)) {
-            if (pokemonListViewModel.state.loading) {
+            if (pokemonListViewModel.statePokemonList.loading) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
@@ -110,6 +110,7 @@ fun HomeScreen(
                                     contentType = pokemonList.itemContentType { it.name }
                                 ) { index ->
                                     DisplayPokemonListElement(
+                                        pokemonListViewModel = pokemonListViewModel,
                                         pokemon = pokemonList[index],
                                         numberPokemon = index,
                                         onDetailClick = onDetailClick
