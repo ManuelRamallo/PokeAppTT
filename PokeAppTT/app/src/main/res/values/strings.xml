@@ -4,4 +4,8 @@
     <string name="error_button">Try again</string>
     <string name="error_no_content_title">All the pokemon have been frightened</string>
     <string name="error_no_content_subtitle">Try again some other time, they may have gone into hiding and will take a while to come back</string>
+    <string name="attribute_weight">Weight</string>
+    <string name="attribute_height">Height</string>
+    <string name="attribute_base_experience">Base Experience</string>
+    <string name="attribute_ability">Ability</string>
 </resources>

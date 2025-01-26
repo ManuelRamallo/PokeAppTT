@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
             PokeAppTTTheme {
                 NavHost(
                     navController = navController,
-                    startDestination = DetailRoute("bulbasaur") // TODO QUITAR ESTO LUEGO Y DEJAR LA HOME
+                    startDestination = HomeRoute
                 ) {
                     composable<HomeRoute> {
                         HomeScreen(

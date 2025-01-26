@@ -18,3 +18,11 @@ fun getColorTextAccordingToBackground(bgColor: Color): Color {
     val preferredReturnColor = if (isColorLight) Color.Black else Color.White
     return preferredReturnColor
 }
+
+fun Int.hectogramsToKilograms(): Double {
+    return this / 10.0
+}
+
+fun Int.decimeterToMeters(): Double {
+    return this / 10.0
+}
