@@ -1,5 +1,7 @@
 # PokeAppChallenge for TT to Agile Content
 
+Technical Test for Agile Content, pokedex App.
+
 ![Captura de pantalla 2025-01-26 a las 20 07 13](https://github.com/user-attachments/assets/fecf7e33-a52c-43b9-88d2-36d07e0c48a4)
 
 
