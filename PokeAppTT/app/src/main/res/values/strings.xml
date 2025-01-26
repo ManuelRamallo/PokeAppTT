@@ -9,5 +9,6 @@
     <string name="attribute_base_experience">Base Experience</string>
     <string name="attribute_ability">Ability</string>
     <string name="placeholder_search">Search Pokemon…</string>
+    <string name="splash_title">POKEDEX</string>
     <string name="powered">Powered by Manuel Ramallo Diaz</string>
 </resources>

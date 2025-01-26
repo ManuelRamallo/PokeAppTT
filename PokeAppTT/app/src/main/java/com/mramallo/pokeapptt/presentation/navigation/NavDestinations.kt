@@ -7,3 +7,6 @@ object HomeRoute
 
 @Serializable
 data class DetailRoute(val namePokemon: String)
+
+@Serializable
+object SplashRoute

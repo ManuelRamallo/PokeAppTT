@@ -10,8 +10,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.mramallo.pokeapptt.presentation.navigation.DetailRoute
 import com.mramallo.pokeapptt.presentation.navigation.HomeRoute
+import com.mramallo.pokeapptt.presentation.navigation.SplashRoute
 import com.mramallo.pokeapptt.presentation.ui.DetailScreen
 import com.mramallo.pokeapptt.presentation.ui.HomeScreen
+import com.mramallo.pokeapptt.presentation.ui.SplashScreenPersonalized
 import com.mramallo.pokeapptt.presentation.ui.theme.PokeAppTTTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,8 +27,15 @@ class MainActivity : ComponentActivity() {
             PokeAppTTTheme {
                 NavHost(
                     navController = navController,
-                    startDestination = HomeRoute
+                    startDestination = SplashRoute
                 ) {
+                    composable<SplashRoute> {
+                        SplashScreenPersonalized(
+                            onFinishSplash = {
+                                navController.navigate(HomeRoute)
+                            }
+                        )
+                    }
                     composable<HomeRoute> {
                         HomeScreen(
                             onDetailClick = { namePokemon ->
