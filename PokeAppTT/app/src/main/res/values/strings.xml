@@ -8,4 +8,5 @@
     <string name="attribute_height">Height</string>
     <string name="attribute_base_experience">Base Experience</string>
     <string name="attribute_ability">Ability</string>
+    <string name="placeholder_search">Search Pokemon…</string>
 </resources>
