@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.dagger)
+    alias(libs.plugins.kotlin.serialization)
     kotlin("kapt")
 }
 
@@ -74,6 +75,9 @@ dependencies {
 
     implementation(libs.coroutine.core)
     implementation(libs.coroutine.android)
+
+    implementation(libs.navigation.compose)
+    implementation(libs.kotlin.serialization.json)
 
 
 }

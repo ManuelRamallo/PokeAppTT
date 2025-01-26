@@ -16,6 +16,8 @@ coilVersion = "3.0.4"
 okHttpVersion = "4.12.0"
 coroutineVersion = "1.10.1"
 dagger = "2.50"
+serializationVersion = "1.6.3"
+navigationVersion = "2.8.5"
 
 
 [libraries]
@@ -39,8 +41,12 @@ retrofit-gson-converter = { group = "com.squareup.retrofit2", name = "converter-
 # Dagger
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerVersion"}
 dagger-kapt = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "daggerVersion"}
-# Navigation
+# Hilt
 hilt-compose-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationVersion"}
+# Navigation
+kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serializationVersion"}
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationVersion"}
+# Paging
 paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "pagingVersion"}
 # Coil
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coilVersion"}
@@ -55,4 +61,5 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 dagger = { id = "com.google.dagger.hilt.android", version.ref = "dagger"}
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
