@@ -1,6 +1,7 @@
 package com.mramallo.pokeapptt.presentation.ui
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -62,7 +63,7 @@ fun HomeScreen(
         modifier = Modifier
             .safeContentPadding()
             .fillMaxSize()
-            .padding(top = 24.dp),
+            .padding(top = 24.dp, start = 16.dp, end = 16.dp),
         topBar = {
             OutlinedTextField(
                 value = query,
@@ -125,7 +126,8 @@ fun HomeScreen(
 
                     LazyColumn(
                         state = listState,
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize(),
+
                     ) {
                         if (pokemonList.loadState.prepend is LoadState.Loading) {
                             item {
