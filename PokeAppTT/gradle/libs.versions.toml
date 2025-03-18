@@ -21,11 +21,14 @@ navigationVersion = "2.8.5"
 mockkVersion = "1.13.10"
 archCoreVersion = "2.2.0"
 coreTestingVersion = "1.6.1"
-
+uiTestAndroid = "1.7.8"
+daggerTest = "2.51.1"
+junitKtx = "1.2.1"
+uiTestJunit4Android = "1.7.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+#androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
@@ -63,6 +66,10 @@ mockk = { group = "io.mockk", name = "mockk", version.ref = "mockkVersion" }
 corroutinesTest = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutineVersion" }
 archCoreTest = { group = "androidx.arch.core", name = "core-testing", version.ref = "archCoreVersion" }
 testCore = { group = "androidx.test", name = "core-ktx", version.ref = "coreTestingVersion" }
+androidx-ui-test-android = { group = "androidx.compose.ui", name = "ui-test-android", version.ref = "uiTestAndroid" }
+hilt-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "daggerTest"}
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
+androidx-ui-test-junit4-android = { group = "androidx.compose.ui", name = "ui-test-junit4-android", version.ref = "uiTestJunit4Android" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
