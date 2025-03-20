@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.dagger)
     alias(libs.plugins.kotlin.serialization)
     kotlin("kapt")
+    alias(libs.plugins.screenshot)
 }
 
 android {
@@ -40,6 +41,8 @@ android {
     buildFeatures {
         compose = true
     }
+
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 }
 
 dependencies {
@@ -87,6 +90,8 @@ dependencies {
 
     implementation(libs.navigation.compose)
     implementation(libs.kotlin.serialization.json)
+
+    screenshotTestImplementation(libs.androidx.ui.tooling)
 
 
 }

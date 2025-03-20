@@ -25,6 +25,7 @@ uiTestAndroid = "1.7.8"
 daggerTest = "2.51.1"
 junitKtx = "1.2.1"
 uiTestJunit4Android = "1.7.8"
+screenshot = "0.0.1-alpha09"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -77,4 +78,5 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 dagger = { id = "com.google.dagger.hilt.android", version.ref = "dagger"}
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot"}
 

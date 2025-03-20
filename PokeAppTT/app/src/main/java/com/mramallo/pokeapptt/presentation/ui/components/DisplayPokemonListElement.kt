@@ -39,15 +39,15 @@ import com.mramallo.pokeapptt.presentation.ui.utils.getColorByTypePokemon
 
 @Composable
 fun DisplayPokemonListElement(
-    pokemonListViewModel: PokemonListViewModel,
+    pokemonListViewModel: PokemonListViewModel? = null,
     pokemon: PokemonResult?,
     onDetailClick: (String) -> Unit
 ) {
 
     LaunchedEffect(Unit) {
-        pokemonListViewModel.getPokemonElement(pokemon?.uuid ?: "", pokemon?.name ?: "")
+        pokemonListViewModel?.getPokemonElement(pokemon?.uuid ?: "", pokemon?.name ?: "")
     }
-    val pokemonElement = pokemonListViewModel.statePokemonElement[pokemon?.uuid]?.pokemonDetail
+    val pokemonElement = pokemonListViewModel?.statePokemonElement?.get(pokemon?.uuid)?.pokemonDetail
 
 
     Card(
@@ -60,7 +60,7 @@ fun DisplayPokemonListElement(
             .padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(containerColor = getColorByTypePokemon(pokemonElement?.types?.get(0)?.type?.name ?: "").copy(alpha = 0.2f))
     ) {
-        if (pokemonListViewModel.statePokemonElement[pokemon?.uuid]?.loading == true) {
+        if (pokemonListViewModel?.statePokemonElement?.get(pokemon?.uuid)?.loading == true) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
